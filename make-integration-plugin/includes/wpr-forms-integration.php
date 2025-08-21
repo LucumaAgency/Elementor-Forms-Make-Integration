@@ -49,11 +49,26 @@ function wpr_forms_capture_early() {
 
 function procesar_wpr_form_submission() {
     
-    // Obtener el form_id del POST
-    $form_id = isset($_POST['form_id']) ? sanitize_text_field($_POST['form_id']) : '';
+    // Obtener el form_id del POST - Royal Addons usa 'wpr_form_id'
+    $form_id = isset($_POST['wpr_form_id']) ? sanitize_text_field($_POST['wpr_form_id']) : '';
+    if ( empty($form_id) && isset($_POST['form_id']) ) {
+        $form_id = sanitize_text_field($_POST['form_id']);
+    }
     
-    // Obtener los campos del formulario
-    $form_fields = isset($_POST['form_fields']) ? $_POST['form_fields'] : [];
+    // Obtener los campos del formulario - Royal Addons usa 'form_content'
+    $form_fields = [];
+    if ( isset($_POST['form_content']) && is_array($_POST['form_content']) ) {
+        // Formato Royal Addons: form_content[form_field-name][1] = valor
+        foreach ( $_POST['form_content'] as $field_key => $field_data ) {
+            if ( is_array($field_data) && isset($field_data[1]) ) {
+                // Extraer el nombre del campo (quitar 'form_field-')
+                $field_name = str_replace('form_field-', '', $field_key);
+                $form_fields[$field_name] = $field_data[1]; // El valor está en el índice 1
+            }
+        }
+    } elseif ( isset($_POST['form_fields']) ) {
+        $form_fields = $_POST['form_fields'];
+    }
     
     error_log( '===== PROCESAMIENTO WPR FORM =====' );
     error_log( 'Form ID detectado: ' . $form_id );
@@ -69,9 +84,9 @@ function procesar_wpr_form_submission() {
     // Configuración de webhooks
     $webhook_config = [
         // Widget IDs de WPR Forms
-        '0e120d0' => 'https://hook.eu2.make.com/7lia5xpdbvjtmwi92yna4kl1bvqtst2o', // inmobiliaria nuevo
-        '23aef76' => 'https://hook.eu2.make.com/7lia5xpdbvjtmwi92yna4kl1bvqtst2o', // inmobiliaria viejo
-        // Agregar aquí el ID del formulario de propietarios cuando lo obtengas
+        '0e120d0' => 'https://hook.eu2.make.com/7lia5xpdbvjtmwi92yna4kl1bvqtst2o', // inmobiliaria
+        '15bbae76' => 'https://hook.eu2.make.com/ka72ct9l6ojhoxoip26phqgubyu7aeoo', // propietarios
+        '23aef76' => 'https://hook.eu2.make.com/ka72ct9l6ojhoxoip26phqgubyu7aeoo', // propietarios alternativo
     ];
     
     // Verificar si tenemos configuración para este formulario
