@@ -41,7 +41,8 @@ function procesar_wpr_form_submission() {
     // Configuración de webhooks
     $webhook_config = [
         // Widget IDs de WPR Forms
-        '23aef76' => 'https://hook.eu2.make.com/7lia5xpdbvjtmwi92yna4kl1bvqtst2o', // inmobiliaria
+        '0e120d0' => 'https://hook.eu2.make.com/7lia5xpdbvjtmwi92yna4kl1bvqtst2o', // inmobiliaria nuevo
+        '23aef76' => 'https://hook.eu2.make.com/7lia5xpdbvjtmwi92yna4kl1bvqtst2o', // inmobiliaria viejo
         // Agregar aquí el ID del formulario de propietarios cuando lo obtengas
     ];
     

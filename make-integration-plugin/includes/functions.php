@@ -73,11 +73,12 @@ function procesar_formulario_generico( $form_data, $form_id, $source = 'unknown'
         // IDs de div contenedor
         'make-integration-propietarios' => 'https://hook.eu2.make.com/ka72ct9l6ojhoxoip26phqgubyu7aeoo',
         'make-integration-inmobiliaria' => 'https://hook.eu2.make.com/7lia5xpdbvjtmwi92yna4kl1bvqtst2o',
-        // IDs antiguos por si acaso
+        // IDs de formulario
         'form-propietarios-make-integration' => 'https://hook.eu2.make.com/ka72ct9l6ojhoxoip26phqgubyu7aeoo',
         'form-inmobiliaria-make-integration' => 'https://hook.eu2.make.com/7lia5xpdbvjtmwi92yna4kl1bvqtst2o',
         // Widget IDs (los data-id del div)
-        '23aef76' => 'https://hook.eu2.make.com/7lia5xpdbvjtmwi92yna4kl1bvqtst2o', // inmobiliaria
+        '0e120d0' => 'https://hook.eu2.make.com/7lia5xpdbvjtmwi92yna4kl1bvqtst2o', // inmobiliaria nuevo
+        '23aef76' => 'https://hook.eu2.make.com/7lia5xpdbvjtmwi92yna4kl1bvqtst2o', // inmobiliaria viejo
     ];
     
     // Verificar si el formulario está en nuestra configuración

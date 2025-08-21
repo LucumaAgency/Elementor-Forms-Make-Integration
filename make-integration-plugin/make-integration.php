@@ -368,7 +368,7 @@ class Make_Integration {
                             <td>
                                 <code>make-integration-inmobiliaria</code><br>
                                 <code>form-inmobiliaria-make-integration</code><br>
-                                <code>23aef76</code> (Widget ID)
+                                <code>0e120d0</code> (Widget ID)
                             </td>
                             <td><code style="font-size: 11px;">https://hook.eu2.make.com/7lia5xpdbvjtmwi92yna4kl1bvqtst2o</code></td>
                             <td><span style="color: green;">✓ Activo</span></td>
