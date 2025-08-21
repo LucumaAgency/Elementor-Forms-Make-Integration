@@ -7,9 +7,37 @@
 // Hook temprano para capturar datos POST antes del procesamiento
 add_action( 'init', 'wpr_forms_capture_early' );
 
+// Hook específico para Royal Addons Forms
+add_action( 'wp_ajax_wpr_addons_form_builder', 'wpr_royal_form_handler', 1 );
+add_action( 'wp_ajax_nopriv_wpr_addons_form_builder', 'wpr_royal_form_handler', 1 );
+
+// Hook alternativo para el submit action
+add_action( 'wp_ajax_wpr_form_submit_action', 'wpr_royal_form_handler', 1 );
+add_action( 'wp_ajax_nopriv_wpr_form_submit_action', 'wpr_royal_form_handler', 1 );
+
+function wpr_royal_form_handler() {
+    error_log( '===== ROYAL ADDONS FORM DETECTADO =====' );
+    error_log( 'Action: ' . ($_POST['action'] ?? 'no action') );
+    error_log( 'Todos los datos POST:' );
+    error_log( print_r( $_POST, true ) );
+    
+    procesar_wpr_form_submission();
+}
+
 function wpr_forms_capture_early() {
+    // Log para debugging de cualquier petición POST con form_fields
+    if ( ! empty( $_POST['form_fields'] ) ) {
+        error_log( '===== FORM FIELDS DETECTADOS EN POST =====' );
+        error_log( 'Action: ' . ($_POST['action'] ?? 'no action') );
+        error_log( 'Form ID: ' . ($_POST['form_id'] ?? 'no form_id') );
+        error_log( 'Form Fields: ' . print_r($_POST['form_fields'], true) );
+    }
+    
     // Solo procesar si es una petición AJAX de WPR Forms
-    if ( ! empty( $_POST['action'] ) && $_POST['action'] === 'wpr_form_builder_submit' ) {
+    if ( ! empty( $_POST['action'] ) && 
+         ( $_POST['action'] === 'wpr_form_builder_submit' || 
+           $_POST['action'] === 'wpr_addons_form_builder' ||
+           strpos($_POST['action'], 'wpr_') === 0 ) ) {
         error_log( '===== WPR FORM AJAX DETECTADO (EARLY) =====' );
         error_log( 'Todos los datos POST:' );
         error_log( print_r( $_POST, true ) );

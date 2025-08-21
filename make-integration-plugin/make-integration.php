@@ -34,6 +34,9 @@ if ( ! function_exists( 'procesar_wpr_form_submission' ) ) {
     require_once MAKE_INTEGRATION_PLUGIN_DIR . 'includes/wpr-forms-integration.php';
 }
 
+// Cargar integración específica de Royal Addons
+require_once MAKE_INTEGRATION_PLUGIN_DIR . 'includes/royal-addons-integration.php';
+
 // Clase principal del plugin
 class Make_Integration {
     
